@@ -36,7 +36,6 @@ public class ReunionServiceImp implements IReunionService {
         if (reunionExistenteOpt.isPresent()) {
             ReunionModel reunionExistente = reunionExistenteOpt.get();
             
-            // Aplicar los cambios. Nota: El idLibro (LibroModel) también puede ser actualizado.
             reunionExistente.setLibro(reunionActualizada.getLibro()); 
             reunionExistente.setFecha(reunionActualizada.getFecha());
             reunionExistente.setHora(reunionActualizada.getHora());
