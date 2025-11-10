@@ -1,7 +1,8 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.ForoModel;
 import java.util.List;
+
+import com.apirest.backend.Model.ForoModel;
 
 public interface IForoService {
     List<ForoModel> obtenerTodos();

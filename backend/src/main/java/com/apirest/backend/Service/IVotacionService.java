@@ -1,7 +1,8 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.VotacionModel;
 import java.util.List;
+
+import com.apirest.backend.Model.VotacionModel;
 
 public interface IVotacionService {
     List<VotacionModel> obtenerTodos();

@@ -1,7 +1,8 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.InscripcionModel;
 import java.util.List;
+
+import com.apirest.backend.Model.InscripcionModel;
 
 public interface IInscripcionService {
     List<InscripcionModel> obtenerTodos();

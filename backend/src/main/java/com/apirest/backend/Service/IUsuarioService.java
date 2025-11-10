@@ -1,7 +1,8 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.UsuarioModel;
 import java.util.List;
+
+import com.apirest.backend.Model.UsuarioModel;
 
 public interface IUsuarioService {
 

@@ -1,7 +1,8 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.PropuestaLibroModel;
 import java.util.List;
+
+import com.apirest.backend.Model.PropuestaLibroModel;
 
 public interface IPropuestaLibroService {
     List<PropuestaLibroModel> obtenerTodos();

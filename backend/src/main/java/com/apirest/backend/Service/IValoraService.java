@@ -1,7 +1,8 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.ValoraModel;
 import java.util.List;
+
+import com.apirest.backend.Model.ValoraModel;
 
 public interface IValoraService {
     List<ValoraModel> obtenerTodos();

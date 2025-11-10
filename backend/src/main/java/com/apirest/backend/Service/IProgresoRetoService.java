@@ -1,7 +1,8 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.ProgresoRetoModel;
 import java.util.List;
+
+import com.apirest.backend.Model.ProgresoRetoModel;
 
 public interface IProgresoRetoService {
     List<ProgresoRetoModel> obtenerTodos();

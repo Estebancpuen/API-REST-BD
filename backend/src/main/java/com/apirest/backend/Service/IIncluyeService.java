@@ -1,7 +1,8 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.IncluyeModel;
 import java.util.List;
+
+import com.apirest.backend.Model.IncluyeModel;
 
 public interface IIncluyeService {
     List<IncluyeModel> obtenerTodos();

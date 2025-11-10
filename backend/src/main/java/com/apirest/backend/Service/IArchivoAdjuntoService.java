@@ -1,7 +1,8 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.ArchivoAdjuntoModel;
 import java.util.List;
+
+import com.apirest.backend.Model.ArchivoAdjuntoModel;
 
 public interface IArchivoAdjuntoService {
     List<ArchivoAdjuntoModel> obtenerTodos();

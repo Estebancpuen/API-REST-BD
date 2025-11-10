@@ -1,7 +1,10 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.ResenaModel;
 import java.util.List;
+
+import java.util.List;
+
+import com.apirest.backend.Model.ResenaModel;
 
 public interface IResenaService {
     List<ResenaModel> obtenerTodos();

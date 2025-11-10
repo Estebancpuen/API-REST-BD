@@ -1,11 +1,13 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.ArchivoAdjuntoModel;
-import com.apirest.backend.Repository.ArchivoAdjuntoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.apirest.backend.Model.ArchivoAdjuntoModel;
+import com.apirest.backend.Repository.ArchivoAdjuntoRepository;
 
 @Service
 public class ArchivoAdjuntoServiceImp implements IArchivoAdjuntoService {
@@ -31,21 +33,32 @@ public class ArchivoAdjuntoServiceImp implements IArchivoAdjuntoService {
 
     @Override
     public ArchivoAdjuntoModel guardarArchivo(ArchivoAdjuntoModel archivo) {
+        if (archivo == null) {
+            throw new IllegalArgumentException("El archivo no puede ser null");
+        }
+        if (archivo.getUrl() == null) {
+            throw new IllegalArgumentException("La URL del archivo no puede ser null");
+        }
         if (!esValido(archivo)) {
-            System.err.println("Error de validación: Un Archivo Adjunto debe estar ligado exactamente a una Reunion O una Reseña.");
-            return null; // En un proyecto real, lanzarías una excepción
+            throw new IllegalArgumentException("Un Archivo Adjunto debe estar ligado exactamente a una Reunion O una Reseña, pero no a ambas");
         }
         return archivoAdjuntoRepository.save(archivo);
     }
 
     @Override
     public ArchivoAdjuntoModel obtenerPorId(Integer id) {
+        if (id == null) {
+            throw new IllegalArgumentException("El ID no puede ser null");
+        }
         Optional<ArchivoAdjuntoModel> archivo = archivoAdjuntoRepository.findById(id);
         return archivo.orElse(null);
     }
 
     @Override
     public ArchivoAdjuntoModel actualizarArchivo(Integer id, ArchivoAdjuntoModel archivoActualizado) {
+        if (id == null || archivoActualizado == null) {
+            throw new IllegalArgumentException("El ID y los datos del archivo no pueden ser null");
+        }
         Optional<ArchivoAdjuntoModel> archivoExistenteOpt = archivoAdjuntoRepository.findById(id);
 
         if (archivoExistenteOpt.isPresent()) {
@@ -73,6 +86,12 @@ public class ArchivoAdjuntoServiceImp implements IArchivoAdjuntoService {
 
     @Override
     public void eliminarArchivo(Integer id) {
+        if (id == null) {
+            throw new IllegalArgumentException("El ID no puede ser null");
+        }
+        if (!archivoAdjuntoRepository.existsById(id)) {
+            throw new IllegalArgumentException("No existe un archivo adjunto con el ID: " + id);
+        }
         archivoAdjuntoRepository.deleteById(id);
     }
 }

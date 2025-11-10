@@ -1,11 +1,13 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.ResenaModel;
-import com.apirest.backend.Repository.ResenaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.apirest.backend.Model.ResenaModel;
+import com.apirest.backend.Repository.ResenaRepository;
 
 @Service
 public class ResenaServiceImp implements IResenaService {
@@ -20,23 +22,40 @@ public class ResenaServiceImp implements IResenaService {
 
     @Override
     public ResenaModel guardarResena(ResenaModel resena) {
-        // Validación básica de la calificación antes de guardar (si no se usa un Trigger o constraints en la DB)
-        if (resena.getCalificacion() == null || resena.getCalificacion() < 1 || resena.getCalificacion() > 5) {
-             // En un proyecto real, lanzarías una excepción aquí.
-             System.err.println("Error: Calificación debe estar entre 1 y 5.");
-             return null;
+        if (resena == null) {
+            throw new IllegalArgumentException("La reseña no puede ser null");
         }
+        // DB: idUsuario, idLibro y fecha y calificacion son NOT NULL
+        if (resena.getUsuario() == null || resena.getUsuario().getIdUsuario() == null) {
+            throw new IllegalArgumentException("La reseña debe tener un usuario válido");
+        }
+        if (resena.getLibro() == null || resena.getLibro().getIdLibro() == null) {
+            throw new IllegalArgumentException("La reseña debe referenciar un libro válido");
+        }
+        if (resena.getFecha() == null) {
+            throw new IllegalArgumentException("La fecha de la reseña no puede ser null");
+        }
+        if (resena.getCalificacion() == null || resena.getCalificacion() < 1 || resena.getCalificacion() > 5) {
+            throw new IllegalArgumentException("La calificación debe estar entre 1 y 5");
+        }
+        // opinion puede ser null
         return resenaRepository.save(resena);
     }
 
     @Override
     public ResenaModel obtenerPorId(Integer id) {
+        if (id == null) {
+            throw new IllegalArgumentException("El ID no puede ser null");
+        }
         Optional<ResenaModel> resena = resenaRepository.findById(id);
         return resena.orElse(null);
     }
 
     @Override
     public ResenaModel actualizarResena(Integer id, ResenaModel resenaActualizada) {
+        if (id == null || resenaActualizada == null) {
+            throw new IllegalArgumentException("El ID y los datos de la reseña no pueden ser null");
+        }
         Optional<ResenaModel> resenaExistenteOpt = resenaRepository.findById(id);
 
         if (resenaExistenteOpt.isPresent()) {

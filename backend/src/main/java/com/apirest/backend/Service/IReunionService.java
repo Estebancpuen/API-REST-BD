@@ -1,7 +1,8 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.ReunionModel;
 import java.util.List;
+
+import com.apirest.backend.Model.ReunionModel;
 
 public interface IReunionService {
     List<ReunionModel> obtenerTodos();

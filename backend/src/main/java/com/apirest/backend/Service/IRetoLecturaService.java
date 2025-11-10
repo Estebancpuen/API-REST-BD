@@ -1,7 +1,7 @@
 package com.apirest.backend.Service;
+import java.util.List;
 
 import com.apirest.backend.Model.RetoLecturaModel;
-import java.util.List;
 
 public interface IRetoLecturaService {
     List<RetoLecturaModel> obtenerTodos();

@@ -1,7 +1,8 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.ComentarioForoModel;
 import java.util.List;
+
+import com.apirest.backend.Model.ComentarioForoModel;
 
 public interface IComentarioForoService {
     List<ComentarioForoModel> obtenerTodos();
