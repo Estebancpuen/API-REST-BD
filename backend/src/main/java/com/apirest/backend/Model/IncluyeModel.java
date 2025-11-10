@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
@@ -25,10 +26,12 @@ public class IncluyeModel {
     private Integer idIncluye;
 
     // Clave Foránea 1: Relación con Libro
+    @ManyToOne
     @JoinColumn(name = "idLibro", nullable = false)
     private LibroModel libro;
     
     // Clave Foránea 2: Relación con RetoLectura
+    @ManyToOne
     @JoinColumn(name = "idReto", nullable = false)
     private RetoLecturaModel reto;
     

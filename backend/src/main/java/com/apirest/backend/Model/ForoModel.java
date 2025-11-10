@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,6 +34,7 @@ public class ForoModel {
     private Integer idForo;
 
     // Relación con Usuario: Muchos a Uno (varios Foros pueden ser creados por el mismo Usuario)
+    @ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
     private UsuarioModel usuario;
     

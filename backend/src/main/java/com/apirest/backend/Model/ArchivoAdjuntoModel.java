@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,10 +38,12 @@ public class ArchivoAdjuntoModel {
     private Integer idArchivo;
 
     // Clave Foránea 1: Relación con Reunion (NULLABLE)
+    @ManyToOne
     @JoinColumn(name = "idReunion", nullable = true)
     private ReunionModel reunion;
     
     // Clave Foránea 2: Relación con Resena (NULLABLE)
+    @ManyToOne
     @JoinColumn(name = "idResena", nullable = true)
     private ResenaModel resena;
 

@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,10 +34,12 @@ public class ProgresoRetoModel {
     private Integer idProgreso;
 
     // Clave Foránea 1: Relación con Inscripcion
+    @ManyToOne
     @JoinColumn(name = "idInscripcion", nullable = false)
     private InscripcionModel inscripcion;
     
     // Clave Foránea 2: Relación con Libro
+    @ManyToOne
     @JoinColumn(name = "idLibro", nullable = false)
     private LibroModel libro;
 
