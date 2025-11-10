@@ -1,8 +1,21 @@
 package com.apirest.backend.Model;
 
-import jakarta.persistence.*;
 import java.sql.Timestamp;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "ComentarioResena")
 public class ComentarioResenaModel {
@@ -12,12 +25,10 @@ public class ComentarioResenaModel {
     private Integer idComentario;
 
     // Clave Foránea 1: Relación con Usuario
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUsuario", nullable = false)
     private UsuarioModel usuario;
     
     // Clave Foránea 2: Relación con Resena
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idResena", nullable = false)
     private ResenaModel resena;
 
@@ -27,50 +38,5 @@ public class ComentarioResenaModel {
     @Column(name = "fechaPublicacion", insertable = false, updatable = false)
     private Timestamp fechaPublicacion; // DEFAULT CURRENT_TIMESTAMP
     
-    // Constructor, Getters y Setters...
-
-    public ComentarioResenaModel() {
-    }
-
-    // --- Getters y Setters ---
-
-    public Integer getIdComentario() {
-        return idComentario;
-    }
-
-    public void setIdComentario(Integer idComentario) {
-        this.idComentario = idComentario;
-    }
-
-    public UsuarioModel getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioModel usuario) {
-        this.usuario = usuario;
-    }
-
-    public ResenaModel getResena() {
-        return resena;
-    }
-
-    public void setResena(ResenaModel resena) {
-        this.resena = resena;
-    }
-
-    public String getContenido() {
-        return contenido;
-    }
-
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
-    }
-
-    public Timestamp getFechaPublicacion() {
-        return fechaPublicacion;
-    }
-
-    public void setFechaPublicacion(Timestamp fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
-    }
+    // No necesitamos constructores, getters ni setters gracias a Lombok
 }

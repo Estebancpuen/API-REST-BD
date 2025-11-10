@@ -1,10 +1,23 @@
 package com.apirest.backend.Model;
 
-import jakarta.persistence.*;
 import java.sql.Timestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "ComentarioForo")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ComentarioForoModel {
 
     @Id
@@ -12,17 +25,14 @@ public class ComentarioForoModel {
     private Integer idComentario;
 
     // Relación recursiva: Un comentario puede ser respuesta de otro (comentarioPadre)
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comentarioPadre") // Por defecto es nullable, como en tu SQL
     private ComentarioForoModel comentarioPadre; 
     
     // Clave Foránea 2: Relación con Usuario
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUsuario", nullable = false)
     private UsuarioModel usuario;
     
     // Clave Foránea 3: Relación con Foro
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idForo", nullable = false)
     private ForoModel foro;
 
@@ -31,59 +41,4 @@ public class ComentarioForoModel {
 
     @Column(length = 2000, nullable = false)
     private String contenido;
-    
-    // Constructor, Getters y Setters...
-
-    public ComentarioForoModel() {
-    }
-
-    // --- Getters y Setters ---
-
-    public Integer getIdComentario() {
-        return idComentario;
-    }
-
-    public void setIdComentario(Integer idComentario) {
-        this.idComentario = idComentario;
-    }
-
-    public ComentarioForoModel getComentarioPadre() {
-        return comentarioPadre;
-    }
-
-    public void setComentarioPadre(ComentarioForoModel comentarioPadre) {
-        this.comentarioPadre = comentarioPadre;
-    }
-
-    public UsuarioModel getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioModel usuario) {
-        this.usuario = usuario;
-    }
-
-    public ForoModel getForo() {
-        return foro;
-    }
-
-    public void setForo(ForoModel foro) {
-        this.foro = foro;
-    }
-
-    public Timestamp getFechaPublicacion() {
-        return fechaPublicacion;
-    }
-
-    public void setFechaPublicacion(Timestamp fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
-    }
-
-    public String getContenido() {
-        return contenido;
-    }
-
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
-    }
 }

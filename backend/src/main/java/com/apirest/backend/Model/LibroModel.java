@@ -1,11 +1,31 @@
 package com.apirest.backend.Model;
 
-import jakarta.persistence.*;
-import java.sql.Date; // Usaremos java.sql.Date para mapear el tipo DATE de MySQL
+import java.sql.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "Libro")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class LibroModel {
+
+    public enum EstadoLectura {
+        pendiente,
+        en_lectura,  // Mantiene el underscore en Java pero MySQL usa espacio
+        leido
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,86 +49,9 @@ public class LibroModel {
     @Column(length = 30)
     private String portada;
 
-    // Mapeo del ENUM 'estadoLectura'
-    @Column(name = "estadoLectura", columnDefinition = "ENUM('pendiente','en lectura','leido')")
-    private String estadoLectura; // "pendiente", "en lectura", "leido"
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estadoLectura", columnDefinition = "ENUM('pendiente','en_lectura','leido')")
+    private EstadoLectura estadoLectura;
 
-    private Date fechaSeleccion; 
-
-    
-    public LibroModel() {
-    }
-
-
-    public Integer getIdLibro() {
-        return idLibro;
-    }
-
-    public void setIdLibro(Integer idLibro) {
-        this.idLibro = idLibro;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public Integer getAnoPublicacion() {
-        return anoPublicacion;
-    }
-
-    public void setAnoPublicacion(Integer anoPublicacion) {
-        this.anoPublicacion = anoPublicacion;
-    }
-
-    public String getSinopsis() {
-        return sinopsis;
-    }
-
-    public void setSinopsis(String sinopsis) {
-        this.sinopsis = sinopsis;
-    }
-
-    public String getPortada() {
-        return portada;
-    }
-
-    public void setPortada(String portada) {
-        this.portada = portada;
-    }
-
-    public String getEstadoLectura() {
-        return estadoLectura;
-    }
-
-    public void setEstadoLectura(String estadoLectura) {
-        this.estadoLectura = estadoLectura;
-    }
-
-    public Date getFechaSeleccion() {
-        return fechaSeleccion;
-    }
-
-    public void setFechaSeleccion(Date fechaSeleccion) {
-        this.fechaSeleccion = fechaSeleccion;
-    }
+    private Date fechaSeleccion;
 }

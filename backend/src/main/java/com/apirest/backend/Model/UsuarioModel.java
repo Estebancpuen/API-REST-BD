@@ -1,12 +1,29 @@
-// src/main/java/com/apirest/backend/Model/UsuarioModel.java
-
 package com.apirest.backend.Model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "Usuario")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsuarioModel {
+
+    public enum Rol {
+        lector,
+        moderador,
+        administrador
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,65 +45,5 @@ public class UsuarioModel {
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "ENUM('lector','moderador','administrador')", nullable = false)
-    private String rol; 
-
-    
-    public UsuarioModel() {
-    }
-
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public String getNombreCompleto() {
-        return nombreCompleto;
-    }
-
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
-    }
-
-    public Integer getEdad() {
-        return edad;
-    }
-
-    public void setEdad(Integer edad) {
-        this.edad = edad;
-    }
-
-    public String getOcupacion() {
-        return ocupacion;
-    }
-
-    public void setOcupacion(String ocupacion) {
-        this.ocupacion = ocupacion;
-    }
-
-    public String getCorreoElectronico() {
-        return correoElectronico;
-    }
-
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
+    private Rol rol;
 }

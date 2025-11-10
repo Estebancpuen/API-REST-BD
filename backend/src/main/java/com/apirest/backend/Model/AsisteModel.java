@@ -1,7 +1,18 @@
 package com.apirest.backend.Model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Asiste")
 public class AsisteModel {
@@ -11,43 +22,12 @@ public class AsisteModel {
     private Integer idAsiste;
 
     // Clave Foránea 1: Relación con Usuario
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUsuario", nullable = false)
     private UsuarioModel usuario;
     
     // Clave Foránea 2: Relación con Reunion
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idReunion", nullable = false)
     private ReunionModel reunion;
     
-    // Constructor, Getters y Setters...
-
-    public AsisteModel() {
-    }
-
-    // --- Getters y Setters ---
-
-    public Integer getIdAsiste() {
-        return idAsiste;
-    }
-
-    public void setIdAsiste(Integer idAsiste) {
-        this.idAsiste = idAsiste;
-    }
-
-    public UsuarioModel getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioModel usuario) {
-        this.usuario = usuario;
-    }
-
-    public ReunionModel getReunion() {
-        return reunion;
-    }
-
-    public void setReunion(ReunionModel reunion) {
-        this.reunion = reunion;
-    }
+    // No necesitamos constructores, getters ni setters gracias a Lombok
 }
