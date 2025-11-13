@@ -64,6 +64,19 @@ public class RetoLecturaServiceImp implements IRetoLecturaService {
 
     @Override
     public void eliminarReto(Integer id) {
+        if (id == null) {
+            throw new IllegalArgumentException("El ID no puede ser null");
+        }
+
+        // Consultar cuántos inscritos hay para ese reto
+        int inscritos = retoLecturaRepository.contarInscritosPorReto(id);
+
+        if (inscritos > 0) {
+            // Si tiene inscritos, no se puede eliminar
+            throw new IllegalStateException("No se puede eliminar el reto porque tiene inscritos.");
+        }
+
+        // Si no tiene inscritos, se elimina normalmente
         retoLecturaRepository.deleteById(id);
     }
 }
