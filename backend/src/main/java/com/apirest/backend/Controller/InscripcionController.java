@@ -59,8 +59,11 @@ public class InscripcionController {
 
     // DELETE: /api/inscripciones/eliminar/{id}
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminarInscripcion(@PathVariable Integer id) {
-        inscripcionService.eliminarInscripcion(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> cancelarInscripcion(@PathVariable Integer id) {
+        // Llama al servicio que ahora ejecuta un 'UPDATE' lógico
+        inscripcionService.eliminarInscripcion(id); 
+    
+        String mensaje = "La inscripción con ID " + id + " ha sido CANCELADA exitosamente.";
+        return ResponseEntity.ok(mensaje);
     }
 }

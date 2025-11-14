@@ -2,11 +2,13 @@ package com.apirest.backend.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apirest.backend.Model.ProgresoRetoModel;
+import com.apirest.backend.Model.ProgresoRetoModel.EstadoProgreso;
 import com.apirest.backend.Repository.ProgresoRetoRepository;
 
 @Service
@@ -21,19 +23,26 @@ public class ProgresoRetoServiceImp implements IProgresoRetoService {
     }
 
     @Override
-    public ProgresoRetoModel guardarProgreso(ProgresoRetoModel progreso) {
-        if (progreso == null) {
-            throw new IllegalArgumentException("El progreso no puede ser null");
-        }
-        // DB: idInscripcion e idLibro son NOT NULL
-        if (progreso.getInscripcion() == null || progreso.getInscripcion().getIdInscripcion() == null) {
-            throw new IllegalArgumentException("El progreso debe referenciar una inscripción válida");
-        }
-        if (progreso.getLibro() == null || progreso.getLibro().getIdLibro() == null) {
-            throw new IllegalArgumentException("El progreso debe referenciar un libro válido");
-        }
-        return progresoRetoRepository.save(progreso);
+public ProgresoRetoModel guardarProgreso(ProgresoRetoModel progreso) {
+    if (progreso == null) {
+        throw new IllegalArgumentException("El progreso no puede ser null");
     }
+    
+    // Extracción y validación de FKs
+    if (progreso.getInscripcion() == null || progreso.getInscripcion().getIdInscripcion() == null) {
+        throw new IllegalArgumentException("El progreso debe referenciar una inscripción válida");
+    }
+    if (progreso.getLibro() == null || progreso.getLibro().getIdLibro() == null) {
+        throw new IllegalArgumentException("El progreso debe referenciar un libro válido");
+    }
+    
+    progreso.setFechaActualizacion(new java.sql.Date(new Date().getTime()));
+        if (progreso.getEstado() == null) {
+        progreso.setEstado(ProgresoRetoModel.EstadoProgreso.no_iniciado);
+    }
+
+    return progresoRetoRepository.save(progreso);
+}
 
     @Override
     public ProgresoRetoModel obtenerPorId(Integer id) {
