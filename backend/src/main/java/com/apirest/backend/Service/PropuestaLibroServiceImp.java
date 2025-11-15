@@ -1,11 +1,13 @@
 package com.apirest.backend.Service;
 
-import com.apirest.backend.Model.PropuestaLibroModel;
-import com.apirest.backend.Repository.PropuestaLibroRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.apirest.backend.Model.PropuestaLibroModel;
+import com.apirest.backend.Repository.PropuestaLibroRepository;
 
 @Service
 public class PropuestaLibroServiceImp implements IPropuestaLibroService {
@@ -20,9 +22,7 @@ public class PropuestaLibroServiceImp implements IPropuestaLibroService {
 
     @Override
     public PropuestaLibroModel guardarPropuesta(PropuestaLibroModel propuesta) {
-        if (propuesta == null) {
-            throw new IllegalArgumentException("La propuesta no puede ser null");
-        }
+
         // DB: idUsuario y idLibro son NOT NULL
         if (propuesta.getUsuario() == null || propuesta.getUsuario().getIdUsuario() == null) {
             throw new IllegalArgumentException("La propuesta debe tener un usuario válido");
@@ -35,9 +35,6 @@ public class PropuestaLibroServiceImp implements IPropuestaLibroService {
 
     @Override
     public PropuestaLibroModel obtenerPorId(Integer id) {
-        if (id == null) {
-            throw new IllegalArgumentException("El ID no puede ser null");
-        }
         Optional<PropuestaLibroModel> propuesta = propuestaLibroRepository.findById(id);
         return propuesta.orElse(null);
     }

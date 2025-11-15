@@ -22,33 +22,24 @@ public class ReunionServiceImp implements IReunionService {
 
     @Override
     public ReunionModel guardarReunion(ReunionModel reunion) {
-        if (reunion == null) {
-            throw new IllegalArgumentException("La reunión no puede ser null");
-        }
+
         // DB: idLibro y fecha son NOT NULL
         if (reunion.getLibro() == null || reunion.getLibro().getIdLibro() == null) {
             throw new IllegalArgumentException("La reunión debe referenciar un libro válido");
         }
-        if (reunion.getFecha() == null) {
-            throw new IllegalArgumentException("La fecha de la reunión no puede ser null");
-        }
+
         return reunionRepository.save(reunion);
     }
 
     @Override
     public ReunionModel obtenerPorId(Integer id) {
-        if (id == null) {
-            throw new IllegalArgumentException("El ID no puede ser null");
-        }
         Optional<ReunionModel> reunion = reunionRepository.findById(id);
         return reunion.orElse(null);
     }
 
     @Override
     public ReunionModel actualizarReunion(Integer id, ReunionModel reunionActualizada) {
-        if (id == null || reunionActualizada == null) {
-            throw new IllegalArgumentException("El ID y los datos de la reunión no pueden ser null");
-        }
+
         Optional<ReunionModel> reunionExistenteOpt = reunionRepository.findById(id);
 
         if (reunionExistenteOpt.isPresent()) {

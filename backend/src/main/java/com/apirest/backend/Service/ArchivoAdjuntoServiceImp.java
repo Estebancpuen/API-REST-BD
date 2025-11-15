@@ -33,14 +33,9 @@ public class ArchivoAdjuntoServiceImp implements IArchivoAdjuntoService {
 
     @Override
     public ArchivoAdjuntoModel guardarArchivo(ArchivoAdjuntoModel archivo) {
-        if (archivo == null) {
-            throw new IllegalArgumentException("El archivo no puede ser null");
-        }
-        if (archivo.getUrl() == null) {
-            throw new IllegalArgumentException("La URL del archivo no puede ser null");
-        }
+
         if (!esValido(archivo)) {
-            throw new IllegalArgumentException("Un Archivo Adjunto debe estar ligado exactamente a una Reunion O una Reseña, pero no a ambas");
+            throw new IllegalArgumentException("Un Archivo Adjunto debe estar ligado exactamente a una Reunion o una Reseña, pero no a ambas");
         }
         return archivoAdjuntoRepository.save(archivo);
     }
@@ -86,9 +81,7 @@ public class ArchivoAdjuntoServiceImp implements IArchivoAdjuntoService {
 
     @Override
     public void eliminarArchivo(Integer id) {
-        if (id == null) {
-            throw new IllegalArgumentException("El ID no puede ser null");
-        }
+
         if (!archivoAdjuntoRepository.existsById(id)) {
             throw new IllegalArgumentException("No existe un archivo adjunto con el ID: " + id);
         }

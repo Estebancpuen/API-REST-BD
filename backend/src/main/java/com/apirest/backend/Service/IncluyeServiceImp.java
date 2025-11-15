@@ -22,9 +22,6 @@ public class IncluyeServiceImp implements IIncluyeService {
 
     @Override
     public IncluyeModel guardarInclusion(IncluyeModel inclusion) {
-        if (inclusion == null) {
-            throw new IllegalArgumentException("La inclusión no puede ser null");
-        }
         // DB: idLibro e idReto son NOT NULL
         if (inclusion.getLibro() == null || inclusion.getLibro().getIdLibro() == null) {
             throw new IllegalArgumentException("La inclusión debe referenciar un libro válido");

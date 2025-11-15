@@ -27,7 +27,7 @@ public class ComentarioForoModel {
 
     // Relación recursiva: Un comentario puede ser respuesta de otro (comentarioPadre)
     @ManyToOne
-    @JoinColumn(name = "comentarioPadre") // Por defecto es nullable, como en tu SQL
+    @JoinColumn(name = "comentarioPadre") // Por defecto es nullable
     private ComentarioForoModel comentarioPadre; 
     
     // Clave Foránea 2: Relación con Usuario

@@ -22,36 +22,25 @@ public class UsuarioServiceImp implements IUsuarioService {
 
     @Override
     public UsuarioModel guardarUsuario(UsuarioModel usuario) {
-        if (usuario == null) {
-            throw new IllegalArgumentException("El usuario no puede ser null");
-        }
         if (usuario.getNombreCompleto() == null || usuario.getNombreCompleto().trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre completo no puede ser null o vacío");
         }
         if (usuario.getCorreoElectronico() == null || usuario.getCorreoElectronico().trim().isEmpty()) {
             throw new IllegalArgumentException("El correo electrónico no puede ser null o vacío");
         }
-        if (usuario.getRol() == null) {
-            throw new IllegalArgumentException("El rol no puede ser null");
-        }
+
         // Los campos edad, ocupacion y telefono pueden ser null según la BD
         return usuarioRepository.save(usuario);
     }
 
     @Override
     public UsuarioModel obtenerPorId(Integer id) {
-        if (id == null) {
-            throw new IllegalArgumentException("El ID no puede ser null");
-        }
         Optional<UsuarioModel> usuario = usuarioRepository.findById(id);
         return usuario.orElse(null); 
     }
 
     @Override
     public void eliminarUsuario(Integer id) {
-        if (id == null) {
-            throw new IllegalArgumentException("El ID no puede ser null");
-        }
         if (!usuarioRepository.existsById(id)) {
             throw new IllegalArgumentException("No existe un usuario con el ID: " + id);
         }
@@ -60,9 +49,6 @@ public class UsuarioServiceImp implements IUsuarioService {
 
     @Override 
     public UsuarioModel actualizarUsuario(Integer id, UsuarioModel usuarioActualizado) {
-        if (id == null || usuarioActualizado == null) {
-            throw new IllegalArgumentException("El ID y los datos del usuario no pueden ser null");
-        }
         
         Optional<UsuarioModel> usuarioExistenteOpt = usuarioRepository.findById(id);
 

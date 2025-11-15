@@ -22,29 +22,17 @@ public class RetoLecturaServiceImp implements IRetoLecturaService {
 
     @Override
     public RetoLecturaModel guardarReto(RetoLecturaModel reto) {
-        if (reto == null) {
-            throw new IllegalArgumentException("El reto no puede ser null");
-        }
-        if (reto.getTitulo() == null || reto.getTitulo().trim().isEmpty()) {
-            throw new IllegalArgumentException("El título del reto no puede ser null o vacío");
-        }
         return retoLecturaRepository.save(reto);
     }
 
     @Override
     public RetoLecturaModel obtenerPorId(Integer id) {
-        if (id == null) {
-            throw new IllegalArgumentException("El ID no puede ser null");
-        }
         Optional<RetoLecturaModel> reto = retoLecturaRepository.findById(id);
         return reto.orElse(null);
     }
 
     @Override
     public RetoLecturaModel actualizarReto(Integer id, RetoLecturaModel retoActualizado) {
-        if (id == null || retoActualizado == null) {
-            throw new IllegalArgumentException("El ID y los datos del reto no pueden ser null");
-        }
         Optional<RetoLecturaModel> retoExistenteOpt = retoLecturaRepository.findById(id);
 
         if (retoExistenteOpt.isPresent()) {
@@ -64,9 +52,6 @@ public class RetoLecturaServiceImp implements IRetoLecturaService {
 
     @Override
     public void eliminarReto(Integer id) {
-        if (id == null) {
-            throw new IllegalArgumentException("El ID no puede ser null");
-        }
 
         // Consultar cuántos inscritos hay para ese reto
         int inscritos = retoLecturaRepository.contarInscritosPorReto(id);

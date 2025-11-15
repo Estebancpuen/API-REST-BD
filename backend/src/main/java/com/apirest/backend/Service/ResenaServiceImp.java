@@ -22,18 +22,12 @@ public class ResenaServiceImp implements IResenaService {
 
     @Override
     public ResenaModel guardarResena(ResenaModel resena) {
-        if (resena == null) {
-            throw new IllegalArgumentException("La reseña no puede ser null");
-        }
         // DB: idUsuario, idLibro y fecha y calificacion son NOT NULL
         if (resena.getUsuario() == null || resena.getUsuario().getIdUsuario() == null) {
             throw new IllegalArgumentException("La reseña debe tener un usuario válido");
         }
         if (resena.getLibro() == null || resena.getLibro().getIdLibro() == null) {
             throw new IllegalArgumentException("La reseña debe referenciar un libro válido");
-        }
-        if (resena.getFecha() == null) {
-            throw new IllegalArgumentException("La fecha de la reseña no puede ser null");
         }
         if (resena.getCalificacion() == null || resena.getCalificacion() < 1 || resena.getCalificacion() > 5) {
             throw new IllegalArgumentException("La calificación debe estar entre 1 y 5");
@@ -44,9 +38,7 @@ public class ResenaServiceImp implements IResenaService {
 
     @Override
     public ResenaModel obtenerPorId(Integer id) {
-        if (id == null) {
-            throw new IllegalArgumentException("El ID no puede ser null");
-        }
+
         Optional<ResenaModel> resena = resenaRepository.findById(id);
         return resena.orElse(null);
     }

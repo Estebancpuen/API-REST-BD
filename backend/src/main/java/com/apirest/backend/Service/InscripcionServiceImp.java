@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.apirest.backend.Model.InscripcionModel;
 import com.apirest.backend.Model.InscripcionModel.EstadoInscripcion;
 import com.apirest.backend.Repository.InscripcionRepository;
@@ -23,9 +24,6 @@ public class InscripcionServiceImp implements IInscripcionService {
 
     @Override
 public InscripcionModel guardarInscripcion(InscripcionModel inscripcion) {
-    if (inscripcion == null) {
-        throw new IllegalArgumentException("La inscripción no puede ser null");
-    }
 
     Integer idUsuario = inscripcion.getUsuario() != null ? inscripcion.getUsuario().getIdUsuario() : null;
     Integer idReto = inscripcion.getReto() != null ? inscripcion.getReto().getIdReto() : null;
@@ -44,9 +42,7 @@ public InscripcionModel guardarInscripcion(InscripcionModel inscripcion) {
 
     @Override
     public InscripcionModel obtenerPorId(Integer id) {
-        if (id == null) {
-            throw new IllegalArgumentException("El ID no puede ser null");
-        }
+
         Optional<InscripcionModel> inscripcion = inscripcionRepository.findById(id);
         return inscripcion.orElse(null);
     }
@@ -75,11 +71,7 @@ public InscripcionModel guardarInscripcion(InscripcionModel inscripcion) {
 
 @Override
 public void eliminarInscripcion(Integer id) {
-
-    if (id == null) {
-        throw new IllegalArgumentException("El ID no puede ser null"); 
-    }
-
+    
     InscripcionModel inscripcion = inscripcionRepository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("Inscripción no encontrada con ID: " + id));
     inscripcion.setEstadoInscripcion(EstadoInscripcion.cancelada); 
